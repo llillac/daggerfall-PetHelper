@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace Game.Pet
 {
-    public class PetConfigurer : MonoBehaviour //todo make private
+    public class PetConfigurer : MonoBehaviour
     {
-        [SerializeField] public MobileTypes petType;
-        [SerializeField] public MobileReactions reaction;
-        [SerializeField] public MobileGender gender;
-        [SerializeField] public byte classicSpawnDistanceType;
-        [SerializeField] public GameObject lightAura;
+        [SerializeField] private MobileTypes petType;
+        [SerializeField] private MobileReactions reaction;
+        [SerializeField] private MobileGender gender;
+        [SerializeField] private byte classicSpawnDistanceType;
+        [SerializeField] private GameObject lightAura;
 
         [SerializeField] private DaggerfallEntityBehaviour entityBehaviour;
 

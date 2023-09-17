@@ -14,7 +14,7 @@ namespace Game.Pet
             _petPrefab = petPrefab;
         }
 
-        public GameObject CreateEnemy(MobileTypes mobileType, Vector3 localPosition,
+        public GameObject Instantiate(MobileTypes mobileType, Vector3 localPosition,
             MobileGender mobileGender = MobileGender.Unspecified, Transform parent = null,
             MobileReactions mobileReaction = MobileReactions.Passive)
         {

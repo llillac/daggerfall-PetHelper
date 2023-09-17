@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 3610721468857306562}
   - component: {fileID: 6133282160988206857}
   - component: {fileID: 2124978470547085299}
+  - component: {fileID: 3712623081983524771}
   m_Layer: 0
   m_Name: DaggerfallPet
   m_TagString: Untagged
@@ -429,7 +430,7 @@ MonoBehaviour:
   reaction: 1
   gender: 0
   classicSpawnDistanceType: 1
-  lightAura: {fileID: 0}
+  lightAura: {fileID: 1563319636301202, guid: 1004bbfa7b5984f40a7b080e442a8eea, type: 3}
   entityBehaviour: {fileID: 11435454}
 --- !u!114 &7209716803657906088
 MonoBehaviour:
@@ -484,9 +485,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccf3008910b490684262e800b508372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerService: {fileID: 6133282160988206857}
+  lootTimer: {fileID: 6133282160988206857}
   lootDelay: 15
-  minHealthPercent: 0.873
+  minHealthPercent: 0.25
   petMotor: {fileID: 4480090568181480411}
 --- !u!114 &6133282160988206857
 MonoBehaviour:
@@ -513,7 +514,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   petSenses: {fileID: 7209716803657906088}
-  maxDistance: 20
+  maxDistance: 15
+--- !u!114 &3712623081983524771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ffab243d560eb4698f5f394d36eb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireMissilePrefab: {fileID: 114701158002484598, guid: 738ed1902aee8694d83f5b5fbf151bd8,
+    type: 3}
+  ColdMissilePrefab: {fileID: 114701158002484598, guid: 481b796491f5b9543b5711183faef15a,
+    type: 3}
+  PoisonMissilePrefab: {fileID: 114701158002484598, guid: d6d8b5ee1acb1424591a58ec6aa291d1,
+    type: 3}
+  ShockMissilePrefab: {fileID: 114701158002484598, guid: f1cb8f301b9f6d74fb1e42543c002b1a,
+    type: 3}
+  MagicMissilePrefab: {fileID: 114701158002484598, guid: 7033bba38a223be4fab81dfb8f3b8f90,
+    type: 3}
 --- !u!1 &3667402534367759475
 GameObject:
   m_ObjectHideFlags: 0

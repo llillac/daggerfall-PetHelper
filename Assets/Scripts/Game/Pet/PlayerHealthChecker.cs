@@ -14,7 +14,7 @@ namespace Game.Pet
         private const int BloodArchive = 380;
         private const string PotionMixedTerm = "potionMixed";
 
-        [SerializeField] private TimerService timerService;
+        [SerializeField] private LootTimer lootTimer;
         [SerializeField] private int lootDelay;
         [SerializeField, Range(0, 1)] private float minHealthPercent;
         [SerializeField] private PetMotor petMotor;
@@ -30,20 +30,15 @@ namespace Game.Pet
 
         private void Update()
         {
-            if (GameManager.IsGamePaused) return;
+            if (GameManager.IsGamePaused || _playerEntityBehaviour.Entity.CurrentHealthPercent == 0)
+                return;
 
             if (_playerEntityBehaviour.Entity.CurrentHealthPercent < minHealthPercent && _readyForNextLoot)
             {
                 _readyForNextLoot = false;
-                timerService.StartTimer(lootDelay, () => _readyForNextLoot = true);
+                lootTimer.StartTimer(lootDelay, () => _readyForNextLoot = true);
                 CreateHealLoot();
             }
-        }
-
-        [ContextMenu("AddHealth")]
-        private void AddHealth() //todo remove
-        {
-            _playerEntityBehaviour.Entity.IncreaseHealth(5);
         }
 
         private void CreateHealLoot()
@@ -58,12 +53,12 @@ namespace Game.Pet
 
             _currentLootContainer =
                 GameObjectHelper.CreateDroppedLootContainer(_playerEntityBehaviour.gameObject, DaggerfallUnity.NextUID);
-            _currentLootContainer.transform.position = petMotor.FindGroundPosition();
+            _currentLootContainer.transform.position = petMotor.FindGroundPosition() + new Vector3(0, 0.3f, 0);
             _currentLootContainer.Items.AddItem(potion);
-            Debug.LogError("Created loot container");
 
             DaggerfallUI.Instance.PopupMessage(TextManager.Instance.GetLocalizedText(PotionMixedTerm));
             DaggerfallUI.Instance.PlayOneShot(SoundClips.MakePotion);
+
             ShowMagicSparkles(_currentLootContainer.transform.position);
             AddHintLight(_currentLootContainer);
         }
@@ -87,6 +82,12 @@ namespace Game.Pet
             billboardInstance.transform.position = sparklesPosition + transform.forward * 0.02f;
             billboard.OneShot = true;
             billboard.FramesPerSecond = 10;
+        }
+
+        [ContextMenu("AddHealth")]
+        private void AddHealth()
+        {
+            _playerEntityBehaviour.Entity.IncreaseHealth(20);
         }
     }
 }

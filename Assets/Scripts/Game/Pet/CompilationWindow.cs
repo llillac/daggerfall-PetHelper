@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Game.Pet
         [MenuItem("Window/Pump Editor/Compilation")]
         private static void ShowWindow()
         {
-            var window = EditorWindow.GetWindow<CompilationWindow>();
+            var window = GetWindow<CompilationWindow>();
             window.titleContent = new GUIContent("Compilation");
             window.Show();
         }
@@ -18,15 +19,9 @@ namespace Game.Pet
         {
             if (GUILayout.Button("Request Script Compilation"))
             {
-            #if UNITY_2019_3_OR_NEWER
                 CompilationPipeline.RequestScriptCompilation();
-            #elif UNITY_2017_1_OR_NEWER
-                var editorAssembly = Assembly.GetAssembly(typeof(Editor));
-                var editorCompilationInterfaceType = editorAssembly.GetType("UnityEditor.Scripting.ScriptCompilation.EditorCompilationInterface");
-                var dirtyAllScriptsMethod = editorCompilationInterfaceType.GetMethod("DirtyAllScripts", BindingFlags.Static | BindingFlags.Public);
-                dirtyAllScriptsMethod.Invoke(editorCompilationInterfaceType, null);
-            #endif
             }
         }
     }
 }
+#endif

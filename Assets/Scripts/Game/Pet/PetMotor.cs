@@ -104,7 +104,10 @@ namespace Game.Pet
             ApplyGravity();
             HandleNoAction();
             UpdateTimers();
-            TakeAction();
+
+            if (_canAct)
+                TakeAction();
+
             ApplyFallDamage();
             UpdateToIdleOrMoveAnim();
             OpenDoors();
